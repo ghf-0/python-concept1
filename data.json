@@ -1,0 +1,20 @@
+[
+    {
+        "name": "JC Denton",
+        "bank": "01234",
+        "agency": "001",
+        "isPremium": true
+    },
+    {
+        "name": "HK",
+        "bank": "02456",
+        "agency": "001",
+        "isPremium": false
+    },
+    {
+        "name": "Wick",
+        "bank": "0887",
+        "agency": "007",
+        "isPremium": false
+    }
+]

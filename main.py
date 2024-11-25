@@ -1,19 +1,34 @@
 import sys
 from igets import igets
 from datamanager import Account, Register
+
+class Command:
+    def __init__(self, name, action, description):
+        self.name = name
+        self.action = action
+        self.description = description
+
 class CLI: # not very practicaç
     def __init__(self):
         self.current_account = None
+        self.commands = [
+            Command("new", self.createAccount, "Create new profile"),
+            Command("load", self.loadAccount, "Load profile"),
+            Command("info", self.viewAccountInfo, "Displays data information about the currently loaded profile"),
+            Command("rename", self.changeAccountName, "Rrename current profile"),
+            Command("premium", self.premiumFeatures, "Access premium menu if available"),
+            Command("save", self.saveAccount, "Saves current profile data"),
+            Command("exit", self.exitApplication, "Shuts down"),
+            Command("help", self.displayInfo, "Displays all available commands")
+        ]
 
-    def displayMenu(self):
-        print("\nMenu:")
-        print("1. Create Account")
-        print("2. Load Account")
-        print("3. View Account Info")
-        print("4. Change Account Name")
-        print("5. Premium Features")
-        print("6. Save Account")
-        print("7. Exit")
+    def handleCommand(self, inpt):
+        for command in self.commands:
+            if command.name == inpt:
+                command.action()
+                return
+        
+        print(f"'{inpt}' is not a recognized command")
     
     def createAccount(self):
         name = igets.Str("Enter account name: ")
@@ -52,35 +67,20 @@ class CLI: # not very practicaç
         else:
             print("No account to save.")
 
-    @staticmethod
-    def exitApplication():
-            print("==========\nExiting...\n==========")
+    def displayInfo(self):
+        print("\nCOMMAND LIST\n")
+        for command in self.commands:
+            print(f"-{command.name}\t\t{command.description}.")
+
+    def exitApplication(self):
+            print("\n==========\nExiting...\n==========")
             
             sys.exit(0)
 
     def run(self):
         while True:
-            self.displayMenu()
-            choice = igets.Str("Choose an option: ")
-
-            
-            if choice == "1":
-                self.createAccount()
-            elif choice == "2":
-                self.loadAccount()
-            elif choice == "3":
-                self.viewAccountInfo()
-            elif choice == "4":
-                self.changeAccountName()
-            elif choice == "5":
-                self.premiumFeatures()
-            elif choice == "6":
-                self.saveAccount()
-            elif choice == "7":
-                CLI.exitApplication()
-            else:
-                print("Invalid option. Please try again.")
-
+            choice = igets.Str(">> ")
+            self.handleCommand(choice)
 
 if __name__ == "__main__":
     cli = CLI()

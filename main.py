@@ -18,6 +18,7 @@ class CLI: # not very practicaç
             Command("rename", self.changeAccountName, "Rrename current profile"),
             Command("premium", self.premiumFeatures, "Access premium menu if available"),
             Command("save", self.saveAccount, "Saves current profile data"),
+            Command("delete", self.deleteAccount, "Deletes saved accounts based on name input"),
             Command("exit", self.exitApplication, "Shuts down"),
             Command("help", self.displayInfo, "Displays all available commands")
         ]
@@ -66,6 +67,10 @@ class CLI: # not very practicaç
             Register.saveAccount(self.current_account)
         else:
             print("No account to save.")
+
+    def deleteAccount(self):
+        username = igets.Str("Enter account name: ")
+        Register.deleteAccount(username)
 
     def displayInfo(self):
         print("\nCOMMAND LIST\n")

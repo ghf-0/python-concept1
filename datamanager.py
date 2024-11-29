@@ -107,3 +107,18 @@ class Register:
                 return loaded_account
 
         print("User not found...")
+
+    @staticmethod
+    def deleteAccount(username):
+        data = Register.loadJson()
+
+        updated = [account for account in data if account["name"] != username]
+
+        if len(updated) == len(data):
+            print(f"Account not found: {username}")
+        
+        else:
+            with open('data.json', 'w') as file:
+                json.dump(updated, file, indent=4)
+            
+            print(f"{username} account has been deleted.")

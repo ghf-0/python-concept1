@@ -53,23 +53,7 @@ class Account:
 
 
 class Register:
-    
-    @staticmethod
-    def serializeData(account): #this shouldn't be here.
-        if type(account) == Account:
-
-            json = {
-                "name": account.name,
-                "bank": account.bank,
-                "agency": account.agency,
-                "isPremium": account.is_premium
-            }
-
-            return json
-        
-        else:
-            print("ERROR: Provided argument is not a valid account.")
-    
+       
     @staticmethod
     def saveAccount(account):
         if Path('data.json').is_file():

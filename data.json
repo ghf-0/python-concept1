@@ -16,5 +16,11 @@
         "bank": "0887",
         "agency": "007",
         "isPremium": false
+    },
+    {
+        "name": "John Doe",
+        "bank": "09887",
+        "agency": "012",
+        "isPremium": true
     }
 ]
